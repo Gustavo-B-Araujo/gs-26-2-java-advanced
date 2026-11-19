@@ -1,0 +1,66 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: boletim-plus-java
+  datasource:
+    url: ${DB_URL:jdbc:oracle:thin:@//localhost:1521/FREEPDB1}
+    username: ${DB_USER:boletim}
+    password: ${DB_PASSWORD:boletim}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        jdbc.time_zone: America/Sao_Paulo
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+  ai:
+    model:
+      embedding: none
+    retry:
+      max-attempts: 1
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      init:
+        pull-model-strategy: ${OLLAMA_PULL:when_missing}
+        timeout: 15m
+      chat:
+        options:
+          model: ${OLLAMA_MODEL:qwen2.5:1.5b}
+          temperature: 0.2
+          num-predict: 300
+          keep-alive: 30m
+
+boletim:
+  jwt:
+    secret: ${JWT_SECRET}
+    issuer: ${JWT_ISSUER:boletim-plus}
+    validade: 8h
+  # Rate limit por cliente (usuário do token ou IP). Passou: 429 com Retry-After.
+  rate-limit:
+    limite-por-janela: ${RATE_LIMIT:100}
+    janela: 60s
+    limite-escrita: ${RATE_LIMIT_ESCRITA:20}
+    janela-escrita: 60s
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always

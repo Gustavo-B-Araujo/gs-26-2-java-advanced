@@ -1,2 +1,8 @@
 Global Solution 2026/2 - Boletim Plus
 Disciplina: Java Advanced
+Truma: 2TDSPW
+
+Repositório: https://github.com/Gustavo-B-Araujo/gs-26-2-java-advanced
+
+Gustavo Barrios de Araújo   RM563358
+Phietro Solon Oliveira      RM563842

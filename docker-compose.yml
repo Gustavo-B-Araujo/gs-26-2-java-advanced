@@ -1,0 +1,60 @@
+services:
+  oracle:
+    image: gvenzl/oracle-free:23-slim
+    environment:
+      ORACLE_PASSWORD: oracle
+      APP_USER: boletim
+      APP_USER_PASSWORD: boletim
+    ports:
+      - "1521:1521"
+    volumes:
+      - ./docker/oracle:/opt/boletim-sql:ro
+      - ./docker/oracle-init:/container-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  rabbitmq:
+    image: rabbitmq:4-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:oracle:thin:@//oracle:1521/FREEPDB1
+      DB_USER: boletim
+      DB_PASSWORD: boletim
+      RABBITMQ_HOST: rabbitmq
+      OLLAMA_BASE_URL: http://ollama:11434
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen2.5:1.5b}
+      JWT_SECRET: ${JWT_SECRET:?Defina JWT_SECRET no .env (32+ caracteres)}
+      JWT_ISSUER: ${JWT_ISSUER:-boletim-plus}
+    depends_on:
+      oracle:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+
+volumes:
+  ollama:

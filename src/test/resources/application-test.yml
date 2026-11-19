@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:boletim;MODE=Oracle;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  rabbitmq:
+    listener:
+      simple:
+        auto-startup: false
+  ai:
+    ollama:
+      init:
+        pull-model-strategy: never
+
+boletim:
+  jwt:
+    secret: chave-somente-para-testes-automatizados-32b
+  rate-limit:
+    limite-por-janela: 100000
+    limite-escrita: 100000
