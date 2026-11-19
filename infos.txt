@@ -6,3 +6,5 @@ Repositório: https://github.com/Gustavo-B-Araujo/gs-26-2-java-advanced
 
 Gustavo Barrios de Araújo   RM563358
 Phietro Solon Oliveira      RM563842
+
+Nota: devido ao custo, decidimos não manter o deploy ativo na Azure, por isso não há link no repositório.
