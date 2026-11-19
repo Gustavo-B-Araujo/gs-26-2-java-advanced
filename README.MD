@@ -1,20 +1,31 @@
-# Boletim Plus — API Java
+# Boletim Plus
 
+Global Solution 2026/2 · CitizenTech
 Global Solution 2026/2 · CitizenTech · Disciplina: Java Advanced
 
-| Nome                      | RM     |
-| ------------------------- | ------ |
+## Integrantes
+
+| Nome | RM |
+|---|---|
 | Gustavo Barrios de Araújo | 563358 |
-| Phietro Solon Oliveira    | 563842 |
+| Phietro Solon Oliveira | 563842 |
 
-## O problema e a solução
+## 1. Problema CitizenTech
 
-O responsável costuma saber da nota baixa ou das faltas do filho só no fim do bimestre. O
-**Boletim Plus** é um boletim digital: o professor lança notas e chamada, e o responsável acompanha
-no app. Esta API Java cuida da conta, do boletim e da **análise do boletim com IA**:
-o LLM lê as notas e a frequência e escreve uma orientação curta para a família. Cada matéria em
-atenção (média < 60 ou frequência < 75%) vira um evento no RabbitMQ, e o consumidor decide quais
-responsáveis avisar.
+Em diversas escolas, o responsável costuma saber da nota baixa ou das faltas do filho só no fim do bimestre, quando o boletim em papel chega. Nessa hora, a recuperação já ficou difícil.
+
+O **Boletim Plus** é um boletim digital. O professor registra notas e presenças, e o sistema:
+
+- calcula a média por aluno e disciplina e classifica a situação (aprovado, recuperação, reprovado);
+- calcula a frequência e gera um alerta quando ela fica abaixo de 75%;
+- indica quais responsáveis devem ser avisados de cada alerta;
+- guarda o histórico das mudanças de status dos usuários, para auditoria.
+- A LLM lê as notas e a frequência e escreve uma orientação curta para a família.
+- Cada matéria em atenção (média < 60 ou frequência < 75%) vira um evento no RabbitMQ, e o consumidor decide quais responsáveis avisar.
+
+O cidadão ganha acompanhamento escolar em tempo real, sem depender de reunião presencial ou de papel.
+
+App mobile que consome esta API: <https://github.com/Gustavo-B-Araujo/gs-26-2-mobile-application-development>
 
 ## Tecnologias
 
