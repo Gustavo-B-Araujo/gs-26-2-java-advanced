@@ -26,6 +26,7 @@ O **Boletim Plus** é um boletim digital. O professor registra notas e presença
 O cidadão ganha acompanhamento escolar em tempo real, sem depender de reunião presencial ou de papel.
 
 App mobile que consome esta API: <https://github.com/Gustavo-B-Araujo/gs-26-2-mobile-application-development>
+Vídeo demonstração (mobile consumindo api): <https://studio.youtube.com/video/8NOZdNgO4Nk/edit>
 
 ## Tecnologias
 

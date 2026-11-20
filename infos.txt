@@ -3,6 +3,7 @@ Disciplina: Java Advanced
 Truma: 2TDSPW
 
 Repositório: https://github.com/Gustavo-B-Araujo/gs-26-2-java-advanced
+Vídeo demonstração (mobile consumindo api): https://studio.youtube.com/video/8NOZdNgO4Nk/edit
 
 Nome completo               RM
 Gustavo Barrios de Araújo   RM563358
